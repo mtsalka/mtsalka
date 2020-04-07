@@ -1,24 +1,5 @@
 'use strict';
 
-//legend
-
-const legend = document.createElement('section');
-document.body.appendChild(legend);
-legend.classList.add('legend');
-
-let opt1 = document.createElement('p');
-let opt2 = document.createElement('p');
-
-let optEng = document.createTextNode('English: Ctrl + E');
-let optRu = document.createTextNode('Russian: Ctrl + R');
-
-legend.appendChild(opt1);
-legend.appendChild(opt2);
-
-opt1.appendChild(optEng);
-opt2.appendChild(optRu);
-
-
 // input area
 
 const inputArea = document.createElement('section');
@@ -35,3 +16,77 @@ inputBox.classList.add('input-box');
 const keyboardArea = document.createElement('section');
 document.body.appendChild(keyboardArea);
 keyboardArea.classList.add('keyboard-area');
+
+//keyboard symbols
+
+let keySymbols = [
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'], 
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'delete'],
+    ['capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'enter'], 
+    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'up', 'shift'],
+    ['crtl', 'win', 'alt', 'space', 'alt', 'ctrl', 'left', 'down', 'right']
+];
+
+
+function displaySymbols(keySymbols) {
+
+    //for row creation
+    for (let i = 0; i < keySymbols.length; i++) {
+
+        let layoutRow = document.createElement('div');
+        keyboardArea.appendChild(layoutRow);
+        layoutRow.classList.add('layout-row');
+
+        //for keyboard-symbol creation
+        for (let el = 0; el < keySymbols[i].length; el++) {
+
+            let symbol = document.createElement('button');
+            layoutRow.appendChild(symbol);
+            symbol.classList.add('keyboard-symbol', 'eng');
+
+            
+            symbol.value = keySymbols[i][el];
+            symbol.textContent = symbol.value;   
+
+            symbol.addEventListener('click', () => {
+                let inp = symbol.value;
+                inputBox.value += inp;
+            })
+
+        }
+    }
+}
+
+displaySymbols(keySymbols);
+
+
+//set active class 
+
+
+let pressed = document.getElementsByClassName('keyboard-symbol');
+
+
+[...pressed].forEach((element) => {
+    element.addEventListener('click', function setActive() {
+        this.classList.toggle('active');
+
+        if (this.classList.contains('active')) {
+            setTimeout( () => {
+                this.classList.remove('active');
+            }, 100);
+        }
+    })
+})
+
+
+//Array.from(press, el => el.addEventListener('click', e => {...})); 
+
+
+
+
+
+
+
+
+
+
