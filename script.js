@@ -1,5 +1,3 @@
-'use strict';
-
 // input area
 
 const inputArea = document.createElement('section');
@@ -11,82 +9,66 @@ const inputBox = document.createElement('textarea');
 inputArea.appendChild(inputBox);
 inputBox.classList.add('input-box');
 
-//keyboard area
+// keyboard area
 
 const keyboardArea = document.createElement('section');
 document.body.appendChild(keyboardArea);
 keyboardArea.classList.add('keyboard-area');
 
-//keyboard symbols
+// keyboard symbols
 
-let keySymbols = [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'], 
-    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'delete'],
-    ['capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'enter'], 
-    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'up', 'shift'],
-    ['crtl', 'win', 'alt', 'space', 'alt', 'ctrl', 'left', 'down', 'right']
+const keySymbols = [
+  ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'],
+  ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'delete'],
+  ['capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'enter'],
+  ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'up', 'shift'],
+  ['crtl', 'win', 'alt', 'space', 'alt', 'ctrl', 'left', 'down', 'right'],
 ];
 
 
+// eslint-disable-next-line no-shadow
 function displaySymbols(keySymbols) {
+  // for row creation
+  for (let i = 0; i < keySymbols.length; i++) {
+    const layoutRow = document.createElement('div');
+    keyboardArea.appendChild(layoutRow);
+    layoutRow.classList.add('layout-row');
 
-    //for row creation
-    for (let i = 0; i < keySymbols.length; i++) {
+    // for keyboard-symbol creation
+    for (let el = 0; el < keySymbols[i].length; el++) {
+      const symbol = document.createElement('button');
+      layoutRow.appendChild(symbol);
+      symbol.classList.add('keyboard-symbol');
 
-        let layoutRow = document.createElement('div');
-        keyboardArea.appendChild(layoutRow);
-        layoutRow.classList.add('layout-row');
 
-        //for keyboard-symbol creation
-        for (let el = 0; el < keySymbols[i].length; el++) {
+      symbol.value = keySymbols[i][el];
+      symbol.textContent = symbol.value;
 
-            let symbol = document.createElement('button');
-            layoutRow.appendChild(symbol);
-            symbol.classList.add('keyboard-symbol');
-
-            
-            symbol.value = keySymbols[i][el];
-            symbol.textContent = symbol.value;   
-
-            symbol.addEventListener('click', () => {
-                let inp = symbol.value;
-                inputBox.value += inp;
-            })
-
-        }
+      symbol.addEventListener('click', () => {
+        const inp = symbol.value;
+        inputBox.value += inp;
+      });
     }
+  }
 }
 
 displaySymbols(keySymbols);
 
 
-//set active class 
+// set active class
 
 
-let pressed = document.getElementsByClassName('keyboard-symbol');
+const pressed = document.getElementsByClassName('keyboard-symbol');
 
 
 [...pressed].forEach((element) => {
-    element.addEventListener('click', function setActive() {
-        this.classList.toggle('active');
+  element.addEventListener('click', function setActive() {
+    this.classList.toggle('active');
 
-        if (this.classList.contains('active')) {
-            setTimeout( () => {
-                this.classList.remove('active');
-            }, 100);
-        }
-    })
-})
-
-
-//Array.from(press, el => el.addEventListener('click', e => {...})); 
-
-
-
-
-
-
-
-
-
-
+    if (this.classList.contains('active')) {
+      setTimeout(() => {
+        this.classList.remove('active');
+      }, 100);
+    }
+  });
+});
