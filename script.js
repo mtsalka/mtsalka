@@ -42,7 +42,7 @@ function displaySymbols(keySymbols) {
 
             let symbol = document.createElement('button');
             layoutRow.appendChild(symbol);
-            symbol.classList.add('keyboard-symbol', 'eng');
+            symbol.classList.add('keyboard-symbol');
 
             
             symbol.value = keySymbols[i][el];
