@@ -2,6 +2,5 @@
 * material icons: https://materializecss.com/icons.html
 
 * solution: https://mtsalka.github.io/virtual-keyboard/
-* contact: telegram/discord @mtsalka
 
 
